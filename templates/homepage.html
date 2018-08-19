@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!--     <link rel="stylesheet" type ='text/css' href="{{ url_for('static', filename='style.css') }}">
+ -->
+
+    <title>Predicting HDB Resale Prices</title>
+  </head>
+
+
+<div class = 'container'>
+<h1 class="text-primary" align = 'center'> 
+	Predicting HDB Resale Prices
+</h1>
+</div>
+
+<div class="container">
+<form align='center' method ="POST" action="{{ url_for('collect_data') }}"
+onsubmit="this.submit(); this.reset(); return false;">
+
+	<div class="form-group">
+		Floor Area Square Metre: <br>
+		<input type = 'text' name='fa_sqm'><br>
+	</div>
+
+	<div class ="form-group">
+		Lease Start Date: <br>
+		<input type = 'text' name='lease_sd'><br>
+	</div>
+
+	<div class ="form-group">
+		Address: <br>
+		<input type = 'text' name='address'><br>
+	</div>
+
+	<div class ="form-group">
+		Town: <br>
+		<select name="town">
+			<option value = "ANG MO KIO">ANG MO KIO</option>
+			<option value = "BEDOK">BEDOK</option>
+			<option value = "BISHAN">BISHAN</option>
+			<option value = "BUKIT BATOK">BUKIT BATOK</option>
+			<option value = "BUKIT MERAH">BUKIT MERAH</option>
+			<option value = "BUKIT PANJANG">BUKIT PANJANG</option>
+			<option value = "BUKIT TIMAH">BUKIT TIMAH</option>
+			<option value = "CENTRAL AREA">CENTRAL AREA</option>
+			<option value = "CHOA CHU KANG">CHOA CHU KANG</option>
+			<option value = "CLEMENTI">CLEMENTI</option>
+			<option value = "GEYLANG">GEYLANG</option>
+			<option value = "HOUGANG">HOUGANG</option>
+			<option value = "JURONG EAST">JURONG EAST</option>
+			<option value = "JURONG WEST">JURONG WEST</option>
+			<option value = "KALLANG/WHAMPOA">KALLANG/WHAMPOA</option>
+			<option value = "MARINE PARADE">MARINE PARADE</option>
+			<option value = "PASIR RIS">PASIR RIS</option>
+			<option value = "PUNGGOL">PUNGGOL</option>
+			<option value = "QUEENSTOWN">QUEENSTOWN</option>
+			<option value = "SEMBAWANG">SEMBAWANG</option>
+			<option value = "SENGKANG">SENGKANG</option>
+			<option value = "SERANGOON">SERANGOON</option>
+			<option value = "TAMPINES">TAMPINES</option>
+			<option value = "TOA PAYOH">TOA PAYOH</option>
+			<option value = "WOODLANDS">WOODLANDS</option>
+			<option value = "YISHUN" >YISHUN</option>
+		</select>
+		<br> 
+	</div>
+
+	<div class ="form-group">
+		Storey Range: <br>
+		<select name="storey_range">
+			<option value="01 TO 03">01 TO 03</option>
+			<option value="04 TO 06">04 TO 06</option>
+			<option value="07 TO 09">07 TO 09</option>
+			<option value="10 TO 12">10 TO 12</option>
+			<option value="13 TO 15">13 TO 15</option>
+			<option value="16 TO 18">16 TO 18</option>
+			<option value="19 TO 21">19 TO 21</option>
+			<option value="22 TO 24">22 TO 24</option>
+			<option value="25 TO 27">25 TO 27</option>
+			<option value="28 TO 30">28 TO 30</option>
+			<option value="31 TO 33">31 TO 33</option>
+			<option value="34 TO 36">34 TO 36</option>
+			<option value="37 TO 39">37 TO 39</option>
+			<option value="40 TO 42">40 TO 42</option>
+			<option value="43 TO 45">43 TO 45</option>
+			<option value="46 TO 48">46 TO 48</option>
+			<option value="49 TO 51">49 TO 51</option>
+		</select>
+		<br>
+	</div>
+
+	<div class ="form-group">
+		Flat Type: (No. of Rooms) <br>
+		<select name = 'flat_type'>
+			<option value = "1 ROOM">1 ROOM</option>
+			<option value = "2 ROOM">2 ROOM</option>
+			<option value = "3 ROOM">3 ROOM</option>
+			<option value = "4 ROOM">4 ROOM</option>
+			<option value = "5 ROOM">5 ROOM</option>
+			<option value = "EXECUTIVE">EXECUTIVE</option>
+			<option value = "MULTI-GENERATION">MULTI-GENERATION</option>
+		</select><br>
+	</div>
+
+	<div class ="form-group">
+		Flat Model: <br>
+		<select name = 'flat_model'>
+			<option value = "Adjoined flat">Adjoined Flat</option>
+			<option value = "Apartment">Apartment</option>
+			<option value = "DBSS">DBSS</option>
+			<option value = "Improved">Improved</option>
+			<option value = "Improved-Maisonette">Improved-Maisonette</option>
+			<option value = "Maisonette">Maisonette</option>
+			<option value = "Model A">Model A</option>
+			<option value = "Model A-Maisonette">Model A-Maisonette</option>
+			<option value = "Model A2">Model A2</option>
+			<option value = "Multi Generation">Multi Generation</option>
+			<option value = "New Generation">New Generation</option>
+			<option value = "Premium Apartment">Premium Apartment</option>
+			<option value = "Premium Apartment Loft">Premium Apartment Loft</option>
+			<option value = "Premium Maisonette">Premium Maisonette</option>
+			<option value = "Simplified">Simplified</option>
+			<option value = "Standard">Standard</option>
+			<option value = "Terrace">Terrace</option>
+			<option value = "Type S1">Type S1</option>
+			<option value = "Type S2">Type S2</option>
+		</select>
+		<br>
+	</div>
+
+
+	<input type = 'submit' name = 'Submit' ><br> 
+
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+
+
