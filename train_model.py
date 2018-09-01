@@ -4,10 +4,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import pickle
-import os
-import sys
 
-os.chdir(sys.path[0])
+
 
 
 def transform_training_data(df):
@@ -33,11 +31,11 @@ def train_and_eval_random_forest(predictors, output):
 	print('Model Fitted')
 	return rf_model
 
-training_data = pd.read_csv(os.getcwd() + '/data/data_2017_latlong_withdist2.csv')
+training_data = pd.read_csv('./data/data_2017_latlong_withdist2.csv')
 X,Y = transform_training_data(training_data)
 fitted_model = train_and_eval_random_forest(X,Y)
 
-with open(os.getcwd() + '/rf_pickled_model.pkl',"wb") as file_handler:
+with open('./rf_pickled_model.pkl',"wb") as file_handler:
     pickle.dump(fitted_model, file_handler)
 
 print('Model Dumped!')

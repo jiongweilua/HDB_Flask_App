@@ -1,5 +1,4 @@
 import json
-import os
 import pandas as pd
 import numpy as np
 import requests
@@ -7,7 +6,6 @@ import json
 import sys
 
 
-os.chdir(sys.path[0])
 
 
 def OneMapSearch (search_string):
@@ -68,7 +66,7 @@ def haversine_np(lon1, lat1, lon2, lat2):
 
 
 def compute_nearest_mrt_dist(add_lon,add_lat):
-    mrt = pd.read_csv(os.getcwd()+ '/data/mrt_stations.csv')
+    mrt = pd.read_csv('./data/mrt_stations.csv')
     mrt = mrt[mrt['linecode']!= 'TE']
     mrt = mrt[mrt['stationcode']!= 'DT36']
     mrt = mrt.reset_index(drop = True) 

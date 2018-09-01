@@ -3,10 +3,6 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
-import sys
-
-
-os.chdir(sys.path[0])
 
 
 colnames = ['floor_area_sqm', 'lease_commence_date', 'age_at_transaction',
@@ -38,15 +34,13 @@ colnames = ['floor_area_sqm', 'lease_commence_date', 'age_at_transaction',
 'town_SERANGOON', 'town_TAMPINES', 'town_TOA PAYOH', 'town_WOODLANDS',
 'town_YISHUN']
 
-
-
-
 def model_predict(sqm,lease_sd,age,dist_mrt,dist_city_hall,flat_model_CAT,storey_range_CAT,flat_type_CAT,town_CAT):
-  with open(os.getcwd()+ '/rf_pickled_model.pkl','rb') as file_handler:
+  with open('./rf_pickled_model.pkl','rb') as file_handler:
     fitted_model = pickle.load(file_handler)
-
   flat_model_discretize = 'flat_model_' + str(flat_model_CAT)
+  print(flat_model_discretize)
   storey_range_discretize = 'storey_range_' + str(storey_range_CAT)
+  print(storey_range_discretize)
   flat_type_discretize = 'flat_type_' + str(flat_type_CAT)
   town_discretize = 'town_' + str(town_CAT)
   dictionary = {'floor_area_sqm' : [float(sqm)], 
@@ -58,8 +52,11 @@ def model_predict(sqm,lease_sd,age,dist_mrt,dist_city_hall,flat_model_CAT,storey
   storey_range_discretize: [1],
   flat_type_discretize: [1],
   town_discretize: [1]}
+  print(dictionary.keys())
   diff = np.setdiff1d(colnames,list(dictionary.keys()))
+  print(diff)
   df = pd.DataFrame.from_dict(dictionary)
+  print(df)
   for col in diff:
     df.loc[0,col] = int(0)
   df = df[colnames]
