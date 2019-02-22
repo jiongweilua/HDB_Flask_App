@@ -65,15 +65,15 @@ def haversine_np(lon1, lat1, lon2, lat2):
     return km
 
 
-def compute_nearest_mrt_dist(add_lon,add_lat):
+def compute_nearest_mrt_dist(address_lon,address_lat):
     mrt = pd.read_csv('./data/mrt_stations.csv')
     mrt = mrt[mrt['linecode']!= 'TE']
     mrt = mrt[mrt['stationcode']!= 'DT36']
     mrt = mrt.reset_index(drop = True) 
     
-    for i in range(0,len(mrt)):
-        mrt['distance'] = haversine_np(add_lon, add_lat, mrt['lon.mrt'], mrt['lat.mrt'])
-    print(mrt.head())
+    mrt['distance'] = mrt.apply(lambda x: 
+                                haversine_np(address_lon, address_lat, x['lon.mrt'],x['lat.mrt']), 
+                                axis = 1)
 
     nearest_mrt_index = mrt['distance'].idxmin(axis = 0)
     nearest_mrt = mrt.loc[nearest_mrt_index,'name.mrt'] 

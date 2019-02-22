@@ -63,6 +63,6 @@ def model_predict(sqm,lease_sd,age,dist_mrt,dist_city_hall,flat_model_CAT,storey
   #print(df.columns)
   #print(fitted_model.predict(df.loc[0].values.reshape(1,-1)))
   prediction = fitted_model.predict(df.loc[0].values.reshape(1,-1))
-  return(prediction[0])
+  return(int(round(prediction[0])))
 
 
